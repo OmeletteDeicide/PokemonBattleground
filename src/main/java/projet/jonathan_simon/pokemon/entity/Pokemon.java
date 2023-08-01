@@ -1,20 +1,20 @@
 package projet.jonathan_simon.pokemon.entity;
 
+import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
-import org.antlr.v4.runtime.misc.NotNull;
+import jakarta.persistence.*;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
 @Data
 @Table(name = "pokemon")
-public class Pokemon {
+public class Pokemon implements Serializable {
 
-    @NotNull
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     Long id;
 
@@ -22,7 +22,9 @@ public class Pokemon {
     String name;
 
     @Column(name = "type")
-    List<typeEnum> type;
+    @Enumerated(EnumType.STRING)
+    @ElementCollection(fetch = FetchType.EAGER)
+    Set<typeEnum> type;
 
     @Column(name = "pc")
     Integer pc;

@@ -1,15 +1,13 @@
 package projet.jonathan_simon.pokemon.service;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Service;
-
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import projet.jonathan_simon.pokemon.entity.Pokemon;
 import projet.jonathan_simon.pokemon.repository.PokemonRepository;
+
+import java.util.List;
+import java.util.Optional;
 
 @Data
 @Service
@@ -22,7 +20,7 @@ public class PokemonService {
     }
 
     public List<Pokemon> getPokemons() {
-        return pokemonRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
+        return pokemonRepository.findAll();
     }
 
     public Optional<Pokemon> getPokemonById(final Long id) {
