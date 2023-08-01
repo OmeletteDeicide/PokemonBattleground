@@ -26,7 +26,7 @@ public class PokemonController {
     @Autowired
     private PokemonService pokemonService;
 
-    @DeleteMapping("/pokemon/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<HttpStatus> delete(@PathVariable("id") Long id) {
         try {
             pokemonService.deletePokemon(id);
@@ -36,7 +36,7 @@ public class PokemonController {
         }
     }
 
-    @GetMapping("/pokemon/all")
+    @GetMapping("/all")
     public ResponseEntity<List<Pokemon>> getAll() {
         try {
             List<Pokemon> pokemons = new ArrayList<Pokemon>();
@@ -52,7 +52,7 @@ public class PokemonController {
         }
     }
 
-    @GetMapping("/pokemon/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Pokemon> getById(@PathVariable("id") Long id) {
         Optional<Pokemon> existingItemOptional = pokemonService.getPokemonById(id);
 
@@ -63,7 +63,7 @@ public class PokemonController {
         }
     }
 
-    @PostMapping("/pokemon/post")
+    @PostMapping("/post")
     public ResponseEntity<Pokemon> create(@RequestBody Pokemon item) {
         try {
             Pokemon savedItem = pokemonService.savePokemon(item);
@@ -73,7 +73,7 @@ public class PokemonController {
         }
     }
 
-    @PutMapping("/pokemon/put/{id}")
+    @PutMapping("/put/{id}")
     public ResponseEntity<Pokemon> update(@PathVariable("id") Long id, @RequestBody Pokemon item) {
         Optional<Pokemon> existingItemOptional = pokemonService.getPokemonById(id);
         if (existingItemOptional.isPresent()) {
