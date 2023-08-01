@@ -7,26 +7,38 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import projet.jonathan_simon.pokemon.entity.Pokemon;
 import projet.jonathan_simon.pokemon.service.PokemonService;
 
-@RestController
+@Controller
 @RequestMapping("/pokemon")
 public class PokemonController {
 
     @Autowired
     private PokemonService pokemonService;
 
-    @DeleteMapping("/delete/{id}")
+    @GetMapping("/home")
+    public String home(Model model) {
+        model.addAttribute("index", pokemonService.getPokemons());
+        return "index";
+    }
+
+    @GetMapping(value = "/pokemons")
+    public String books(Model model) {
+        model.addAttribute("pokemons", pokemonService.getPokemons());
+        return "pokeList";
+    }
+
+    @GetMapping("/delete/{id}")
     public ResponseEntity<HttpStatus> delete(@PathVariable("id") Long id) {
         try {
             pokemonService.deletePokemon(id);
