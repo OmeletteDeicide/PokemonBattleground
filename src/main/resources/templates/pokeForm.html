@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <title>Title</title>
+  </head>
+  <body>
+    <main>
+      <form action="#" th:action="@{/form}" th:object="${pokemon}" method="post">
+        <div class="container-lg">
+          <br \>
+          <div class="text">
+            <p>Veuilliez insérer <strong>le nom du Pokémon</strong> avec <strong>sa vie</strong> (PV), <strong>son attaque</strong>, <strong>sa défense</strong>, et <strong>son/ses type(s)</strong></p>
+          </div>
+          <br \>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default1" type="text" th:field="*{name}" aria-required="true">Titre du livre</span>
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default2" type="number" th:field="*{pv}" aria-required="true">Nom de l'auteur</span>
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default3" type="number" th:field="*{attaque}" aria-required="true">Année de publication</span>
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default4" type="number" th:field="*{attaque}" aria-required="true">Année de publication</span>
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default5" type="number" th:field="*{defense}" aria-required="true">Année de publication</span>
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default6" type="text" th:field="*{type}" aria-required="true">Année de publication</span>
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+          </div>
+          <div class="d-grid gap-2 d-md-block">
+            <button class="btn btn-primary" type="submit">Créer le Pokémon</button>
+            <button class="btn btn-secondary" type="reset">Réinitialiser les valeurs</button>
+          </div>
+        </div>
+      </form>
+    </main>
+  </body>
+</html>

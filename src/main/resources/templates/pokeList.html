@@ -1,66 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <title>[Books] - List of Book</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-      crossorigin="anonymous"
-    ></script>
+    <meta charset="UTF-8">
+    <title>[Pokémon] - Accueil</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="../">[PokeHub]</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="/pokemon/pokemons"
-                >Your PokeFriends !</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/pokemon/all">All pokemon JSON</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/pokemon/name">Search for a pokemon</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/form">PokeBattle</a>
-            </li>
-          </ul>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <header>
+      <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="../">Accueil Pokémon</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/pokemon/pokemons">Liste des pokémons</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/pokemon/battle">Poké Battle</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Actions sur les pokémons
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="/pokemon/post">Créer un nouveau Pokémon</a></li>
+                  <li><a class="dropdown-item" href="/pokemon/put">Modifier un Pokémon</a></li>
+                  <li><a class="dropdown-item" href="/pokemon/delete">Supprimer un Pokémon</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
         </div>
+      </nav>
+    </header>
+    <main>
+      <div class="container-lg">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Identifiant du Pokédex</th>
+              <th>Nom</th>
+              <th>Type</th>
+              <th>Point de Combat</th>
+              <th>Point de Vie</th>
+              <th>Point d'Attaque</th>
+              <th>Point de Défense</th>
+            </tr>
+          </thead>
+          <tbody>
+            <th:block th:each="pokemon : ${pokemons}">
+              <tr>
+                <td th:text="${pokemon.id}"></td>
+                <td th:text="${pokemon.name}"></td>
+                <td th:text="${pokemon.type}"></td>
+                <td th:text="${pokemon.pc}"></td>
+                <td th:text="${pokemon.pv}"></td>
+                <td th:text="${pokemon.attack}"></td>
+                <td th:text="${pokemon.defense}"></td>
+              </tr>
+            </th:block>
+          </tbody>
+        </table>
       </div>
-    </nav>
-    <div class="container-lg">
-      <table>
-        <th:block th:each="pokemon : ${pokemons}">
-          <tr>
-            <td th:text="${pokemon.id}"></td>
-            <td th:text="${pokemon.name}"></td>
-            <td th:text="${pokemon.type}"></td>
-            <td th:text="${pokemon.pc}"></td>
-          </tr>
-        </th:block>
-      </table>
-    </div>
+    </main>
+    <footer>
+      <h1>Bienvenue sur la page d'accueil de notre Site Web Spring Boot</h1>
+      <i>Développer par Jonathan MARTIN et Simon BARTHE</i>
+    </footer>
   </body>
 </html>
