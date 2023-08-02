@@ -24,37 +24,40 @@ import projet.jonathan_simon.pokemon.service.PokemonService;
 @RequestMapping("/pokemon")
 public class PokemonController {
 
-    @Autowired
-    private PokemonService pokemonService;
+    private final PokemonService service;
+
+    public PokemonController(PokemonService service) {
+        this.service = service;
+    }
 
     @GetMapping("/home")
     public String home(Model model) {
-        model.addAttribute("index", pokemonService.getPokemons());
+        model.addAttribute("index", service.getPokemons());
         return "index";
     }
 
     @GetMapping(value = "/pokemons")
     public String pokemons(Model model) {
-        model.addAttribute("pokemons", pokemonService.getPokemons());
+        model.addAttribute("pokemons", service.getPokemons());
         return "pokeList";
     }
 
-    @GetMapping(value = "/pokeForm")
-    public String createLink(Model model) {
-        model.addAttribute("pokeForm", new Pokemon());
+    @GetMapping("/pokeForm")
+    public String form(Model model) {
+        model.addAttribute("pokemon", new Pokemon());
         return "pokeForm";
     }
 
-    @PostMapping(value = "/pokeForm")
-    public String pokeSubmit(@ModelAttribute Pokemon pokemon, Model model) {
-        model.addAttribute("pokeForm", pokemon);
+    @PostMapping("/pokeForm")
+    public String greetingSubmit(@ModelAttribute Pokemon pokemon, Model model) {
+        model.addAttribute("pokemon", service.savePokemon(pokemon));
         return "pokeList";
     }
 
     @GetMapping("/delete/{id}")
     public ResponseEntity<HttpStatus> delete(@PathVariable("id") Long id) {
         try {
-            pokemonService.deletePokemon(id);
+            service.deletePokemon(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
@@ -66,7 +69,7 @@ public class PokemonController {
         try {
             List<Pokemon> pokemons = new ArrayList<Pokemon>();
 
-            pokemonService.getPokemons().forEach(pokemons::add);
+            service.getPokemons().forEach(pokemons::add);
 
             if (pokemons.isEmpty())
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -79,7 +82,7 @@ public class PokemonController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Pokemon> getById(@PathVariable("id") Long id) {
-        Optional<Pokemon> existingItemOptional = pokemonService.getPokemonById(id);
+        Optional<Pokemon> existingItemOptional = service.getPokemonById(id);
 
         if (existingItemOptional.isPresent()) {
             return new ResponseEntity<>(existingItemOptional.get(), HttpStatus.OK);
@@ -88,25 +91,15 @@ public class PokemonController {
         }
     }
 
-    @PostMapping("/post")
-    public ResponseEntity<Pokemon> create(@RequestBody Pokemon pokemon) {
-        try {
-            Pokemon savedItem = pokemonService.savePokemon(pokemon);
-            return new ResponseEntity<>(savedItem, HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
-        }
-    }
-
     @PutMapping("/put/{id}")
     public ResponseEntity<Pokemon> update(@PathVariable("id") Long id, @RequestBody Pokemon item) {
-        Optional<Pokemon> existingItemOptional = pokemonService.getPokemonById(id);
+        Optional<Pokemon> existingItemOptional = service.getPokemonById(id);
         if (existingItemOptional.isPresent()) {
             Pokemon existingItem = existingItemOptional.get();
             System.out
                     .println("TODO for developer - update logic is unique to entity and must be implemented manually.");
             // existingItem.setSomeField(item.getSomeField());
-            return new ResponseEntity<>(pokemonService.savePokemon(existingItem), HttpStatus.OK);
+            return new ResponseEntity<>(service.savePokemon(existingItem), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

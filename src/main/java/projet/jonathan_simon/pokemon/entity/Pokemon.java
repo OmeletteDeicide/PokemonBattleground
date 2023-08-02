@@ -65,4 +65,43 @@ public class Pokemon implements Serializable {
         this.name = name;
     }
 
+    public Set<typeEnum> getType() {
+        return type;
+    }
+
+    public void setType(Set<typeEnum> type) {
+        this.type = type;
+    }
+
+    public Integer getPc() {
+        return pc;
+    }
+
+    public void setPc(Integer pc) {
+        this.pc = pc;
+    }
+
+    public Integer getPv() {
+        return pv;
+    }
+
+    public void setPv(Integer pv) {
+        this.pv = pv;
+    }
+
+    public Integer getAttack() {
+        return attack;
+    }
+
+    public void setAttack(Integer attack) {
+        this.attack = attack;
+    }
+
+    public Integer getDefense() {
+        return defense;
+    }
+
+    public void setDefense(Integer defense) {
+        this.defense = defense;
+    }
 }

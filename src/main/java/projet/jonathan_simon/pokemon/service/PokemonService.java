@@ -27,7 +27,7 @@ public class PokemonService {
         return pokemonRepository.findById(id);
     }
 
-    public Pokemon savePokemon(final Pokemon pokemon) {
+    public Pokemon savePokemon(Pokemon pokemon) {
         return pokemonRepository.save(pokemon);
     }
 

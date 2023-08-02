@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <title>Title</title>
-  </head>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>[Pokémon] - Ajouter un Pokémon</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
   <body>
     <div th:replace="fragments/header :: header"></div>
     <main>
-      <form action="#" th:action="@{/post}" th:object="${pokemon}" method="post">
+      <form action="#" th:action="@{/pokeForm}" th:object="${pokemon}" method="post">
         <div class="container-lg">
           <br \>
           <div class="text">
@@ -23,17 +25,18 @@
             <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
           </div>
           <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default4" type="number" th:field="*{attack}" aria-required="true">Attaque</span>
+            <span class="input-group-text" id="inputGroup-sizing-default3" type="number" th:field="*{attack}" aria-required="true">Point d'attauqe</span>
             <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
           </div>
           <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default5" type="number" th:field="*{defense}" aria-required="true">Defense</span>
+            <span class="input-group-text" id="inputGroup-sizing-default4" type="number" th:field="*{defense}" aria-required="true">Point de défense</span>
             <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
           </div>
           <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default6" type="text" th:field="*{type}" aria-required="true">Type</span>
+            <span class="input-group-text" id="inputGroup-sizing-default5" type="number" th:field="*{pc}" aria-required="true">Point de Combat</span>
             <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
           </div>
+
           <div class="d-grid gap-2 d-md-block">
             <button class="btn btn-primary" type="submit">Créer le Pokémon</button>
             <button class="btn btn-secondary" type="reset">Réinitialiser les valeurs</button>
@@ -41,6 +44,6 @@
         </div>
       </form>
     </main>
-    <div th:replace="fragments/header :: header"></div>
+    <div th:replace="fragments/footer :: footer"></div>
   </body>
 </html>
