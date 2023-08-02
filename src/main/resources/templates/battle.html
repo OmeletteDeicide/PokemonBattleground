@@ -1,34 +1,55 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <title>[Pokémon] - Combat entre Pokémons</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <title>[Pokémon] - Combat entre Pokémons</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+  </head>
   <body>
     <div th:replace="fragments/header :: header"></div>
     <main>
       <div class="container-lg">
-        <br \>
+        <br \ />
         <div class="text">
-          <p>Veuilliez cliquer le boutton <strong>COMBATTRE</strong> pour générer un combat entre 2 pokémons choisit aléatoirement parmit les pokémons existant sur le site</p>
+          <p>
+            Veuilliez cliquer le boutton <strong>COMBATTRE</strong> pour générer
+            un combat entre 2 pokémons choisit aléatoirement parmit les pokémons
+            existant sur le site
+          </p>
         </div>
-        <br \>
-        <div class="d-grid gap-2 d-md-block">
-          <button class="btn btn-warning" type="submit">COMBATTRE</button>
+        <br \ />
+      </div>
+      <form
+        action="#"
+        th:action="@{/pokeFight}"
+        th:object="${pokemon}"
+        method="post"
+      >
+        <div class="row">
+          <div class="col-2"></div>
+          <div class="col-6">
+            <select class="form-select">
+              <option
+                th:each="pokemon : ${pokemons}"
+                th:text="${pokemon.name} + ', ' + ${pokemon.pc} + ' PC, ' + ${pokemon.pv} + ' PV'"
+                class="dropdown-item"
+              ></option>
+            </select>
+          </div>
+          <div class="col-1"></div>
+          <div class="col-2">
+            <div class="d-grid gap-2 d-md-block">
+              <button class="btn btn-warning" type="submit">COMBATTRE</button>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Selectionner votre Pokémon
-        </button>
-        <th:block th:each="pokemon : ${pokemons}">
-          <tr>
-            <td td:text="${pokemon.name}, ${pokemon.type}, ${pokemon.pc}, ${pokemon.pv}" class="dropdown-item"></td>
-          </tr>
-        </th:block>
-      </div>
+      </form>
     </main>
     <div th:replace="fragments/footer :: footer"></div>
   </body>
