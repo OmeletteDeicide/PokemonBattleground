@@ -53,6 +53,18 @@ public class PokemonController {
         return "pokeList";
     }
 
+    @GetMapping("/pokeFight")
+    public String formFight(Model model) {
+        model.addAttribute("pokemon", new Pokemon());
+        return "battle";
+    }
+
+    @PostMapping("/pokeFight")
+    public String greetingSubmitFight(@ModelAttribute Pokemon pokemonAttaquant, Pokemon pokemonDefenseur, Model model) {
+        model.addAttribute("pokemon", getAll());
+        return "battle";
+    }
+
     @GetMapping("/delete/{id}")
     public ResponseEntity<HttpStatus> delete(@PathVariable("id") Long id) {
         try {
