@@ -5,8 +5,9 @@
       <title>Title</title>
   </head>
   <body>
+    <div th:replace="fragments/header :: header"></div>
     <main>
-      <form action="#" th:action="@{/form}" th:object="${pokemon}" method="post">
+      <form action="#" th:action="@{/post}" th:object="${pokemon}" method="post">
         <div class="container-lg">
           <br \>
           <div class="text">
@@ -14,27 +15,23 @@
           </div>
           <br \>
           <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default1" type="text" th:field="*{name}" aria-required="true">Titre du livre</span>
+            <span class="input-group-text" id="inputGroup-sizing-default1" type="text" th:field="*{name}" aria-required="true">Nom</span>
             <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
           </div>
           <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default2" type="number" th:field="*{pv}" aria-required="true">Nom de l'auteur</span>
+            <span class="input-group-text" id="inputGroup-sizing-default2" type="number" th:field="*{pv}" aria-required="true">Point de Vie</span>
             <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
           </div>
           <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default3" type="number" th:field="*{attaque}" aria-required="true">Année de publication</span>
+            <span class="input-group-text" id="inputGroup-sizing-default4" type="number" th:field="*{attack}" aria-required="true">Attaque</span>
             <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
           </div>
           <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default4" type="number" th:field="*{attaque}" aria-required="true">Année de publication</span>
+            <span class="input-group-text" id="inputGroup-sizing-default5" type="number" th:field="*{defense}" aria-required="true">Defense</span>
             <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
           </div>
           <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default5" type="number" th:field="*{defense}" aria-required="true">Année de publication</span>
-            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-          </div>
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default6" type="text" th:field="*{type}" aria-required="true">Année de publication</span>
+            <span class="input-group-text" id="inputGroup-sizing-default6" type="text" th:field="*{type}" aria-required="true">Type</span>
             <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
           </div>
           <div class="d-grid gap-2 d-md-block">
@@ -44,5 +41,6 @@
         </div>
       </form>
     </main>
+    <div th:replace="fragments/header :: header"></div>
   </body>
 </html>

@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -33,8 +34,20 @@ public class PokemonController {
     }
 
     @GetMapping(value = "/pokemons")
-    public String books(Model model) {
+    public String pokemons(Model model) {
         model.addAttribute("pokemons", pokemonService.getPokemons());
+        return "pokeList";
+    }
+
+    @GetMapping(value = "/pokeForm")
+    public String createLink(Model model) {
+        model.addAttribute("pokeForm", new Pokemon());
+        return "pokeForm";
+    }
+
+    @PostMapping(value = "/pokeForm")
+    public String pokeSubmit(@ModelAttribute Pokemon pokemon, Model model) {
+        model.addAttribute("pokeForm", pokemon);
         return "pokeList";
     }
 
@@ -76,9 +89,9 @@ public class PokemonController {
     }
 
     @PostMapping("/post")
-    public ResponseEntity<Pokemon> create(@RequestBody Pokemon item) {
+    public ResponseEntity<Pokemon> create(@RequestBody Pokemon pokemon) {
         try {
-            Pokemon savedItem = pokemonService.savePokemon(item);
+            Pokemon savedItem = pokemonService.savePokemon(pokemon);
             return new ResponseEntity<>(savedItem, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);

@@ -1,11 +1,18 @@
 package projet.jonathan_simon.pokemon.entity;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
 
-import jakarta.persistence.*;
-
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
@@ -39,6 +46,7 @@ public class Pokemon implements Serializable {
     Integer defense;
 
     public Pokemon() {
+        super();
     }
 
     public Long getId() {
@@ -48,4 +56,13 @@ public class Pokemon implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 }
