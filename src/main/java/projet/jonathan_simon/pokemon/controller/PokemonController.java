@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import projet.jonathan_simon.pokemon.entity.Pokemon;
@@ -46,22 +44,29 @@ public class PokemonController {
         model.addAttribute("pokemon", new Pokemon());
         return "pokeForm";
     }
-
     @PostMapping("/pokeForm")
-    public String greetingSubmit(@ModelAttribute Pokemon pokemon, Model model) {
-        model.addAttribute("pokemon", service.savePokemon(pokemon));
-        return "pokeList";
+    public String greetingSubmit(Pokemon pokemon) {
+        service.savePokemon(pokemon);
+        return "pokeSucces";
     }
 
-    @GetMapping("/pokeFight")
+    @GetMapping("/battle")
     public String formFight(Model model) {
-        model.addAttribute("pokemon", new Pokemon());
+            Pokemon pokemonId = new Pokemon();
+            // Permet d'afficher dasn le select
+            model.addAttribute("pokemons", service.getPokemons());
+            model.addAttribute("pokemonId", pokemonId);
         return "battle";
     }
 
-    @PostMapping("/pokeFight")
-    public String greetingSubmitFight(@ModelAttribute Pokemon pokemonAttaquant, Pokemon pokemonDefenseur, Model model) {
-        model.addAttribute("pokemon", getAll());
+    @PostMapping("/battle")
+    public String greetingSubmitFight(@ModelAttribute("pokemonId") Pokemon pokemon) {
+        Optional<Pokemon> pokemonAttaquant = service.getPokemonById(pokemon.getId());
+        if (pokemonAttaquant.isPresent())
+        {
+            pokemon = pokemonAttaquant.get();
+            System.out.println(pokemon);
+        }
         return "battle";
     }
 
@@ -100,25 +105,5 @@ public class PokemonController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-    }
-
-    @PutMapping("/put/{id}")
-    public ResponseEntity<Pokemon> update(@PathVariable("id") Long id, @RequestBody Pokemon item) {
-        Optional<Pokemon> existingItemOptional = service.getPokemonById(id);
-        if (existingItemOptional.isPresent()) {
-            Pokemon existingItem = existingItemOptional.get();
-            System.out
-                    .println("TODO for developer - update logic is unique to entity and must be implemented manually.");
-            // existingItem.setSomeField(item.getSomeField());
-            return new ResponseEntity<>(service.savePokemon(existingItem), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
-    @GetMapping("/battle")
-    public String battle(Model model) {
-        model.addAttribute("pokemons", service.getPokemons());
-        return "battle";
     }
 }

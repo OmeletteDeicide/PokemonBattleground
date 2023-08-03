@@ -23,28 +23,28 @@ import lombok.Data;
 public class Pokemon implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    Long id;
+    private Long id;
 
     @Column(name = "name")
-    String name;
+    private String name;
 
     @Column(name = "type")
     @Enumerated(EnumType.STRING)
-    typeEnum type;
+    private typeEnum type;
 
     @Column(name = "pc")
-    Integer pc;
+    private Integer pc;
 
     @Column(name = "pv")
-    Integer pv;
+    private Integer pv;
 
     @Column(name = "attack")
-    Integer attack;
+    private Integer attack;
 
     @Column(name = "defense")
-    Integer defense;
+    private Integer defense;
 
     public Pokemon() {
         super();
@@ -192,5 +192,18 @@ public class Pokemon implements Serializable {
             }
         }
         return action;
+    }
+
+    @Override
+    public String toString() {
+        return "Pokemon{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", type=" + type +
+                ", pc=" + pc +
+                ", pv=" + pv +
+                ", attack=" + attack +
+                ", defense=" + defense +
+                '}';
     }
 }

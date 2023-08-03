@@ -14,31 +14,27 @@
   <body>
     <div th:replace="fragments/header :: header"></div>
     <main>
-      <div class="container-lg">
-        <br \ />
-        <div class="text">
-          <p>
-            Veuilliez cliquer le boutton <strong>COMBATTRE</strong> pour générer
-            un combat entre 2 pokémons choisit aléatoirement parmit les pokémons
-            existant sur le site
-          </p>
+      <form action="#" th:action="@{/pokemon/battle}" th:object="${pokemonId}" method="post">
+        <div class="container-lg">
+          <br/>
+          <div class="text">
+            <p>
+              Veuilliez cliquer le boutton <strong>COMBATTRE</strong> pour générer
+              un combat entre 2 pokémons choisit aléatoirement parmit les pokémons
+              existant sur le site
+            </p>
+          </div>
+          <br/>
         </div>
-        <br \ />
-      </div>
-      <form
-        action="#"
-        th:action="@{/pokeFight}"
-        th:object="${pokemon}"
-        method="post"
-      >
         <div class="row">
           <div class="col-2"></div>
           <div class="col-6">
-            <select class="form-select">
+            <label for="selectId">Choisissez un pokémon :</label>
+            <select id="selectId" name="pokemon" th:field="*{id}" class="form-select">
               <option
-                th:each="pokemon : ${pokemons}"
-                th:text="${pokemon.name} + ', ' + ${pokemon.pc} + ' PC, ' + ${pokemon.pv} + ' PV'"
-                class="dropdown-item"
+                      th:each="pokemon : ${pokemons}"
+                      th:text="${pokemon.name} + ', ' + ${pokemon.pc} + ' PC, ' + ${pokemon.pv} + ' PV'"
+                      class="dropdown-item" th:value="${pokemon.id}"
               ></option>
             </select>
           </div>

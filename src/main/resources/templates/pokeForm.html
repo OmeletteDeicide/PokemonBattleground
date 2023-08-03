@@ -9,7 +9,7 @@
   <body>
     <div th:replace="fragments/header :: header"></div>
     <main>
-      <form action="#" th:action="@{/pokeForm}" th:object="${pokemon}" method="post">
+      <form action="#" th:action="@{/pokemon/pokeForm}" th:object="${pokemon}" method="post">
         <div class="container-lg">
           <br \>
           <div class="text">
@@ -17,24 +17,28 @@
           </div>
           <br \>
           <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default1" type="text" th:field="*{name}" aria-required="true">Nom</span>
-            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            <span class="input-group-text" id="inputGroup-sizing-default1" for="name" type="text" aria-required="true">Nom</span>
+            <input type="text" class="form-control" aria-label="Sizing example input" id="name" name="name" th:field="*{name}" aria-describedby="inputGroup-sizing-default">
           </div>
           <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default2" type="number" th:field="*{pv}" aria-required="true">Point de Vie</span>
-            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            <span class="input-group-text" id="inputGroup-sizing-default2" for="pv" type="number"  aria-required="true">Point de Vie</span>
+            <input type="text" class="form-control" aria-label="Sizing example input" id="pv" name="pv" th:field="*{pv}" aria-describedby="inputGroup-sizing-default">
           </div>
           <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default3" type="number" th:field="*{attack}" aria-required="true">Point d'attaque</span>
-            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            <span class="input-group-text" id="inputGroup-sizing-default3" for="attack" type="number"  aria-required="true">Point d'attaque</span>
+            <input type="text" class="form-control" aria-label="Sizing example input" id="attack" name="attack" th:field="*{attack}" aria-describedby="inputGroup-sizing-default">
           </div>
           <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default4" type="number" th:field="*{defense}" aria-required="true">Point de défense</span>
-            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            <span class="input-group-text" id="inputGroup-sizing-default4" for="defense" type="number"  aria-required="true">Point de défense</span>
+            <input type="text" class="form-control" aria-label="Sizing example input" id="defense" name="defense" th:field="*{defense}" aria-describedby="inputGroup-sizing-default">
           </div>
           <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default5" type="number" th:field="*{pc}" aria-required="true">Point de Combat</span>
-            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            <span class="input-group-text" id="inputGroup-sizing-default5" for="pc" type="number"  aria-required="true">Point de Combat</span>
+            <input type="text" class="form-control" aria-label="Sizing example input" id="pc" name="pc" th:field="*{pc}" aria-describedby="inputGroup-sizing-default">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default6" for="type" type="text"  aria-required="true">Type</span>
+            <input type="text" class="form-control" aria-label="Sizing example input" id="type" name="type" th:field="*{type}" aria-describedby="inputGroup-sizing-default">
           </div>
 
           <div class="d-grid gap-2 d-md-block">
