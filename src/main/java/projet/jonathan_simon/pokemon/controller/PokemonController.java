@@ -3,6 +3,7 @@ package projet.jonathan_simon.pokemon.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import projet.jonathan_simon.pokemon.entity.Pokemon;
 import projet.jonathan_simon.pokemon.service.PokemonService;
@@ -44,6 +46,7 @@ public class PokemonController {
         model.addAttribute("pokemon", new Pokemon());
         return "pokeForm";
     }
+
     @PostMapping("/pokeForm")
     public String greetingSubmit(Pokemon pokemon) {
         service.savePokemon(pokemon);
@@ -52,22 +55,60 @@ public class PokemonController {
 
     @GetMapping("/battle")
     public String formFight(Model model) {
-            Pokemon pokemonId = new Pokemon();
-            // Permet d'afficher dasn le select
-            model.addAttribute("pokemons", service.getPokemons());
-            model.addAttribute("pokemonId", pokemonId);
+        Pokemon pokemonId = new Pokemon();
+        // Permet d'afficher dasn le select
+        model.addAttribute("pokemons", service.getPokemons());
+        model.addAttribute("pokemonId", pokemonId);
         return "battle";
     }
 
     @PostMapping("/battle")
-    public String greetingSubmitFight(@ModelAttribute("pokemonId") Pokemon pokemon) {
-        Optional<Pokemon> pokemonAttaquant = service.getPokemonById(pokemon.getId());
-        if (pokemonAttaquant.isPresent())
-        {
-            pokemon = pokemonAttaquant.get();
-            System.out.println(pokemon);
+    public String greetingSubmitFight(@ModelAttribute("pokemonId") Pokemon pokemonA, Model model) {
+        Optional<Pokemon> pokemonAttaquant = service.getPokemonById(pokemonA.getId());
+        Random r = new Random();
+        Long defenserId = r.nextLong(service.countAll());
+        Optional<Pokemon> pokemonDefenseur = service.getPokemonById(defenserId);
+        Pokemon pokemonD = new Pokemon();
+        if (pokemonAttaquant.isPresent()) {
+            pokemonA = pokemonAttaquant.get();
         }
-        return "battle";
+        if (pokemonDefenseur.isPresent()) {
+            pokemonD = pokemonDefenseur.get();
+        }
+        model.addAttribute("pokemonAttaquant", pokemonA);
+        model.addAttribute("pokemonDefenseur", pokemonD);
+
+        return "battle2";
+    }
+
+    @GetMapping("/battle2")
+    public String formFight2(@RequestParam("pokemonAttaquant") Pokemon pokemonA,
+            @RequestParam("pokemonDefenseur") Pokemon pokemonD, Model model) {
+
+        if (pokemonA.getId() != null) {
+            model.addAttribute("pokemonAttaquant", pokemonA);
+        }
+        if (pokemonD.getId() != null) {
+            model.addAttribute("pokemonDefenseur", pokemonD);
+        }
+        return "battle2";
+    }
+
+    @PostMapping("/battle2")
+    public String greetingSubmitFight2(@RequestParam("pokemonAttaquant") Pokemon pokemonA,
+            @RequestParam("pokemonDefenseur") Pokemon pokemonD, Model model) {
+        model.addAttribute("pokemonAttaquant", pokemonA);
+        model.addAttribute("pokemonDefenseur", pokemonD);
+
+        return "battle3";
+    }
+
+    @GetMapping("/battle3")
+    public String formFight3(@RequestParam("pokemonAttaquant") Pokemon pokemonA,
+            @RequestParam("pokemonDefenseur") Pokemon pokemonD, Model model) {
+        model.addAttribute("pokemonAttaquant", pokemonA);
+        model.addAttribute("pokemonDefenseur", pokemonD);
+        return "battle3";
     }
 
     @GetMapping("/delete/{id}")

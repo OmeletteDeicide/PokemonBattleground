@@ -12,7 +12,7 @@
     />
   </head>
   <body>
-    <div th:replace="fragments/header :: header"></div>
+    <div th:replace="~{fragments/header :: header}"></div>
     <main>
       <form action="#" th:action="@{/pokemon/battle}" th:object="${pokemonId}" method="post">
         <div class="container-lg">
@@ -41,12 +41,20 @@
           <div class="col-1"></div>
           <div class="col-2">
             <div class="d-grid gap-2 d-md-block">
-              <button class="btn btn-warning" type="submit">COMBATTRE</button>
+              <button class="btn btn-warning" type="submit">PRÊT</button>
             </div>
           </div>
         </div>
       </form>
+      <div class="row">
+        <div class="col-2">
+          <label name="pokemonAttaquant" th:value="${pokemonAttaquant}"></label>
+        </div>
+        <div class="col-2">
+          <label name="pokemonDefenseur" th:value="${pokemonDefenseur}"></label>
+        </div>
+      </div>
     </main>
-    <div th:replace="fragments/footer :: footer"></div>
+    <div th:replace="~{fragments/footer :: footer}"></div>
   </body>
 </html>

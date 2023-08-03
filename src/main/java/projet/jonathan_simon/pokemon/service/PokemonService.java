@@ -1,13 +1,14 @@
 package projet.jonathan_simon.pokemon.service;
 
-import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import projet.jonathan_simon.pokemon.entity.Pokemon;
-import projet.jonathan_simon.pokemon.repository.PokemonRepository;
-
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import lombok.Data;
+import projet.jonathan_simon.pokemon.entity.Pokemon;
+import projet.jonathan_simon.pokemon.repository.PokemonRepository;
 
 @Data
 @Service
@@ -34,5 +35,9 @@ public class PokemonService {
     public void deletePokemon(final Long id) {
         pokemonRepository.deleteById(id);
         return;
+    }
+
+    public Long countAll() {
+        return pokemonRepository.count();
     }
 }
