@@ -29,18 +29,21 @@ public class PokemonController {
         this.service = service;
     }
 
+    // Page d'accueil de notre site
     @GetMapping("/home")
     public String home(Model model) {
         model.addAttribute("index", service.getPokemons());
         return "index";
     }
 
+    // Page de présentation de tous les pokémons en BDD
     @GetMapping(value = "/pokemons")
     public String pokemons(Model model) {
         model.addAttribute("pokemons", service.getPokemons());
         return "pokeList";
     }
 
+    // Page de présentation de la création de pokémons en BDD
     @GetMapping("/pokeForm")
     public String form(Model model) {
         Pokemon pokemon = new Pokemon();
@@ -48,12 +51,14 @@ public class PokemonController {
         return "pokeForm";
     }
 
+    // Page de création de pokémons en BDD
     @PostMapping("/pokeForm")
     public String greetingSubmit(Pokemon pokemon) {
         service.savePokemon(pokemon);
         return "pokeSucces";
     }
 
+    // Page de combat de pokémons
     @GetMapping("/battle")
     public String formFight(Model model) {
         Pokemon pokemonId = new Pokemon();
@@ -63,6 +68,7 @@ public class PokemonController {
         return "battle";
     }
 
+    // Page de combat de pokémons
     @PostMapping("/battle")
     public String greetingSubmitFight(@ModelAttribute("pokemonId") Pokemon pokemonA, Model model) {
         Optional<Pokemon> pokemonAttaquant = service.getPokemonById(pokemonA.getId());
@@ -82,6 +88,7 @@ public class PokemonController {
         return "battle2";
     }
 
+    // Page de combat de pokémons
     @GetMapping("/battle2")
     public String formFight2(@RequestParam("pokemonAttaquant") Pokemon pokemonA,
             @RequestParam("pokemonDefenseur") Pokemon pokemonD, Model model) {
@@ -91,6 +98,7 @@ public class PokemonController {
         return "battle2";
     }
 
+    // Page de combat de pokémons
     @PostMapping("/battle2")
     public String greetingSubmitFight2(@RequestParam("pokemonAttaquant") Pokemon pokemonA,
             @RequestParam("pokemonDefenseur") Pokemon pokemonD, Model model) {
@@ -100,6 +108,7 @@ public class PokemonController {
         return "battle3";
     }
 
+    // Page de combat de pokémons
     @GetMapping("/battle3")
     public String formFight3(@RequestParam("pokemonAttaquant") Long pokemonAttaquantId,
             @RequestParam("pokemonDefenseur") Long pokemonDefenseurId, Model model) {
@@ -117,40 +126,43 @@ public class PokemonController {
         }
     }
 
-    @GetMapping("/delete/{id}")
-    public ResponseEntity<HttpStatus> delete(@PathVariable("id") Long id) {
-        try {
-            service.deletePokemon(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
-        }
+    // Page de présentation de la suppression de pokémons en BDD
+    @GetMapping("/pokeDelete")
+    public String formDelete(Model model) {
+        Pokemon pokemonId = new Pokemon();
+        // Permet d'afficher dasn le select
+        model.addAttribute("pokemons", service.getPokemons());
+        model.addAttribute("pokemonId", pokemonId);
+        return "pokeDelete";
     }
 
-    @GetMapping("/all")
-    public ResponseEntity<List<Pokemon>> getAll() {
-        try {
-            List<Pokemon> pokemons = new ArrayList<Pokemon>();
-
-            service.getPokemons().forEach(pokemons::add);
-
-            if (pokemons.isEmpty())
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-
-            return new ResponseEntity<>(pokemons, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    // Page de suppression de pokémons en BDD
+    @PostMapping("/pokeDelete")
+    public String greetingSubmitDelete(@ModelAttribute("pokemonId") Pokemon pokemon) {
+        service.deletePokemon(pokemon.getId());
+        return "pokeDeleteSuccess";
     }
 
+    // Page d'affichage d'un pokémon en BDD
     @GetMapping("/{id}")
-    public ResponseEntity<Pokemon> getById(@PathVariable("id") Long id) {
+    public String getById(@PathVariable("id") Long id, Model model) {
         Optional<Pokemon> existingItemOptional = service.getPokemonById(id);
-
+        Pokemon pokemon = new Pokemon();
         if (existingItemOptional.isPresent()) {
-            return new ResponseEntity<>(existingItemOptional.get(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            pokemon = existingItemOptional.get();
+        }
+        model.addAttribute("pokemon", pokemon);
+        return "pokeDetail";
+    }
+
+    // Page de suppresion d'un pokémon en BDD depuis l'affichage unique du pokémon
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Long id) {
+        try {
+             service.deletePokemon(id);
+            return "pokeDeleteSuccess";
+        } catch (Exception e) {
+            return "Error";
         }
     }
 }

@@ -8,9 +8,22 @@
   </head>
   <body>
     <div th:replace="~{fragments/header :: header}"></div>
-  <main>
-    <h4>Vous pouvez créer votre porpre Pokemon Via la barre en haut</h4>
-  </main>
+    <main>
+      <div class="container">
+        <br>
+        <h4>Bienvenue sur la page d'accueil de notre site Pokémon.</h4>
+        <p>Ce site permet de créer, lister, supprimer des pokémons qui sont stockés en base de données MariaDB en local.</p>
+        <br>
+        <p>Vous pouvez également faire combattre le pokémon que vous souhaitez face à un pokémon aléatoire de la liste des pokémons éxistant en base de données.</p>
+        <br>
+        <h4>Objectifs :</h4>
+        <p>Ce site web à été développé dans le cadre d'un projet de mise en application d'un site web Spring Boot via l'utilisation de Thymleaf pour les templates.</p>
+        <p>Ce site est basé sur un cahier des charges que vous pouvez retrouver joint avec le projet Java.</p>
+        <br>
+        <h1>Télécharger le fichier PDF</h1>
+        <a href="/download-pdf" download="Jonathan_MARTIN_Simon_BARTHE_CDC.pdf">Télécharger PDF</a>
+      </div>
+    </main>
     <div th:replace="~{fragments/footer :: footer}"></div>
   </body>
 </html>
