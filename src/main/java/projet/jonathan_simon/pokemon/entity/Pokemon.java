@@ -2,6 +2,8 @@ package projet.jonathan_simon.pokemon.entity;
 
 import java.io.Serializable;
 
+import org.antlr.v4.runtime.misc.NotNull;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -11,7 +13,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
-import org.antlr.v4.runtime.misc.NotNull;
 
 @Entity
 @Data
@@ -159,22 +160,28 @@ public class Pokemon implements Serializable {
         String action = "";
         float degats = 0;
         int pv = 0;
-        while (pokemon1.getPv() > 0 || pokemon2.getPv() > 0) {
-            if (pokemon1.getPv() > 0) {
-                degats = pokemon1.Hit(pokemon1, pokemon2);
-                pokemon2.setPv((int) (pokemon2.pv - degats));
-                action += "Le pokemon " + pokemon1.getName() + " à fait " + degats + " au pokemon "
-                        + pokemon2.getName();
+        Pokemon pokemonAttaquant = pokemon1;
+        Pokemon pokemonDefenseur = pokemon2;
+        while (pokemonAttaquant.pv > 0 || pokemonDefenseur.pv > 0) {
+            if (pokemonAttaquant.pv > 0) {
+                degats = pokemonAttaquant.Hit(pokemonAttaquant, pokemonDefenseur);
+                pokemonDefenseur.pv = ((int) (pokemonDefenseur.pv - degats));
+                action += "Le pokemon " + pokemonAttaquant.getName() + " à fait " + degats + " au pokemon "
+                        + pokemonDefenseur.getName() + "\n";
             } else {
-                action += "Le pokemon " + pokemon1.getName() + " à mis K.O " + pokemon2.getName();
+                action += "Le pokemon " + pokemonAttaquant.getName() + " à mis K.O " + pokemonDefenseur.getName()
+                        + "\n";
+                return action;
             }
-            if (pokemon2.getPv() > 0) {
-                degats = pokemon2.Hit(pokemon2, pokemon1);
-                pokemon1.setPv((int) (pokemon1.pv - degats));
-                action += "Le pokemon " + pokemon2.getName() + " à fait " + degats + " au pokemon "
-                        + pokemon1.getName();
+            if (pokemonDefenseur.pv > 0) {
+                degats = pokemonDefenseur.Hit(pokemonDefenseur, pokemonAttaquant);
+                pokemonAttaquant.pv = ((int) (pokemonAttaquant.pv - degats));
+                action += "Le pokemon " + pokemonDefenseur.getName() + " à fait " + degats + " au pokemon "
+                        + pokemonAttaquant.getName() + "\n";
             } else {
-                action += "Le pokemon " + pokemon2.getName() + " à mis K.O " + pokemon1.getName();
+                action += "Le pokemon " + pokemonDefenseur.getName() + " à mis K.O " + pokemonAttaquant.getName()
+                        + "\n";
+                return action;
             }
         }
         return action;

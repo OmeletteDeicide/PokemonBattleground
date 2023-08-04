@@ -94,6 +94,10 @@ public class PokemonController {
     @PostMapping("/battle2")
     public String greetingSubmitFight2(@RequestParam("pokemonAttaquant") Pokemon pokemonA,
             @RequestParam("pokemonDefenseur") Pokemon pokemonD, Model model) {
+
+        String resultatCombat = pokemonA.Fight(pokemonA, pokemonD);
+
+        model.addAttribute("resultatCombat", resultatCombat);
         model.addAttribute("pokemonAttaquant", pokemonA);
         model.addAttribute("pokemonDefenseur", pokemonD);
 
@@ -102,14 +106,19 @@ public class PokemonController {
 
     @GetMapping("/battle3")
     public String formFight3(@RequestParam("pokemonAttaquant") Long pokemonAttaquantId,
-            @RequestParam("pokemonDefenseur") Long pokemonDefenseurId, Model model) {
-
+            @RequestParam("pokemonDefenseur") Long pokemonDefenseurId,
+            @RequestParam("resultCombat") String resultCombat, Model model) {
         Optional<Pokemon> pokemonAttaquant = service.getPokemonById(pokemonAttaquantId);
         Optional<Pokemon> pokemonDefenseur = service.getPokemonById(pokemonDefenseurId);
+        model.addAttribute("resultatCombat", resultCombat);
 
         if (pokemonAttaquant.isPresent() && pokemonDefenseur.isPresent()) {
-            model.addAttribute("pokemonAttaquant", pokemonAttaquant.get());
-            model.addAttribute("pokemonDefenseur", pokemonDefenseur.get());
+            Pokemon pokemonA = pokemonAttaquant.get();
+            Pokemon pokemonD = pokemonDefenseur.get();
+
+            model.addAttribute("pokemonAttaquant", pokemonA);
+            model.addAttribute("pokemonDefenseur", pokemonD);
+
             return "battle3";
         } else {
             // Gérer les cas où les Pokémon ne peuvent pas être trouvés
