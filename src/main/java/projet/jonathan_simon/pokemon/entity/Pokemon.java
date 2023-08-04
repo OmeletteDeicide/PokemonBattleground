@@ -175,7 +175,8 @@ public class Pokemon implements Serializable {
             if (pokemonAttaquant.pv > 0) {
                 degats = pokemonAttaquant.Hit(pokemonAttaquant, pokemonDefenseur);
                 pokemonDefenseur.pv = ((int) (pokemonDefenseur.pv - degats));
-                action += "Le pokemon " + pokemonAttaquant.getName() + " à fait " + degats + " au pokemon "
+                action += "Le pokemon " + pokemonAttaquant.getName() + " à fait " + degats
+                        + " points de dégats au pokemon "
                         + pokemonDefenseur.getName() + "\r";
             } else {
                 action += "Le pokemon " + pokemonDefenseur.getName() + " à mis K.O " + pokemonAttaquant.getName()
@@ -185,7 +186,8 @@ public class Pokemon implements Serializable {
             if (pokemonDefenseur.pv > 0) {
                 degats = pokemonDefenseur.Hit(pokemonDefenseur, pokemonAttaquant);
                 pokemonAttaquant.pv = ((int) (pokemonAttaquant.pv - degats));
-                action += "Le pokemon " + pokemonDefenseur.getName() + " à fait " + degats + " au pokemon "
+                action += "Le pokemon " + pokemonDefenseur.getName() + " à fait " + degats
+                        + " points de d\u00E9gats au pokemon "
                         + pokemonAttaquant.getName() + "\r";
             } else {
                 action += "Le pokemon " + pokemonAttaquant.getName() + " à mis K.O " + pokemonDefenseur.getName()
