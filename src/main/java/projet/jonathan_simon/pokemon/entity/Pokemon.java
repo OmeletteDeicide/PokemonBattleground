@@ -2,8 +2,6 @@ package projet.jonathan_simon.pokemon.entity;
 
 import java.io.Serializable;
 
-import org.antlr.v4.runtime.misc.NotNull;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -25,7 +23,6 @@ public class Pokemon implements Serializable {
     private Long id;
 
     @Column(name = "name")
-    @NotNull
     private String name;
 
     @Column(name = "type")
@@ -36,15 +33,12 @@ public class Pokemon implements Serializable {
     private Integer pc;
 
     @Column(name = "pv")
-    @NotNull
     private Integer pv;
 
     @Column(name = "attack")
-    @NotNull
     private Integer attack;
 
     @Column(name = "defense")
-    @NotNull
     private Integer defense;
 
     public Pokemon() {
@@ -108,6 +102,9 @@ public class Pokemon implements Serializable {
     }
 
     public Integer Hit(Pokemon pokemon1, Pokemon pokemon2) {
+        int attack = 0;
+        int defense = 0;
+        int pv = 0;
         double multiply = 1;
         int damage = 0;
         // Pokemon de type : FEU, EAU, PLANTE
@@ -158,6 +155,8 @@ public class Pokemon implements Serializable {
 
     public String Fight(Pokemon pokemon1, Pokemon pokemon2) {
         String action = "";
+        int attack = 0;
+        int health = 0;
         float degats = 0;
         int pv = 0;
         Pokemon pokemonAttaquant = pokemon1;
@@ -185,18 +184,5 @@ public class Pokemon implements Serializable {
             }
         }
         return action;
-    }
-
-    @Override
-    public String toString() {
-        return "Pokemon{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", type=" + type +
-                ", pc=" + pc +
-                ", pv=" + pv +
-                ", attack=" + attack +
-                ", defense=" + defense +
-                '}';
     }
 }

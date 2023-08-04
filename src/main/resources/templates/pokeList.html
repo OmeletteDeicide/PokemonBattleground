@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8">
     <title>[Pokémon] - Accueil</title>
@@ -27,7 +27,9 @@
             <th:block th:each="pokemon : ${pokemons}">
               <tr>
                 <td th:text="${pokemon.id}"></td>
-                <td th:text="${pokemon.name}"></td>
+                <td>
+                  <a th:href="@{/pokemon/__${pokemon.id}__}" th:text="${pokemon.name}"></a>
+                </td>
                 <td th:text="${pokemon.type}"></td>
                 <td th:text="${pokemon.pc}"></td>
                 <td th:text="${pokemon.pv}"></td>
