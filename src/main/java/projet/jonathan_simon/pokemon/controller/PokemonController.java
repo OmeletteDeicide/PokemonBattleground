@@ -85,12 +85,8 @@ public class PokemonController {
     public String formFight2(@RequestParam("pokemonAttaquant") Pokemon pokemonA,
             @RequestParam("pokemonDefenseur") Pokemon pokemonD, Model model) {
 
-        if (pokemonA.getId() != null) {
-            model.addAttribute("pokemonAttaquant", pokemonA);
-        }
-        if (pokemonD.getId() != null) {
-            model.addAttribute("pokemonDefenseur", pokemonD);
-        }
+        model.addAttribute("pokemonAttaquant", pokemonA);
+        model.addAttribute("pokemonDefenseur", pokemonD);
         return "battle2";
     }
 
@@ -104,11 +100,20 @@ public class PokemonController {
     }
 
     @GetMapping("/battle3")
-    public String formFight3(@RequestParam("pokemonAttaquant") Pokemon pokemonA,
-            @RequestParam("pokemonDefenseur") Pokemon pokemonD, Model model) {
-        model.addAttribute("pokemonAttaquant", pokemonA);
-        model.addAttribute("pokemonDefenseur", pokemonD);
-        return "battle3";
+    public String formFight3(@RequestParam("pokemonAttaquant") Long pokemonAttaquantId,
+            @RequestParam("pokemonDefenseur") Long pokemonDefenseurId, Model model) {
+
+        Optional<Pokemon> pokemonAttaquant = service.getPokemonById(pokemonAttaquantId);
+        Optional<Pokemon> pokemonDefenseur = service.getPokemonById(pokemonDefenseurId);
+
+        if (pokemonAttaquant.isPresent() && pokemonDefenseur.isPresent()) {
+            model.addAttribute("pokemonAttaquant", pokemonAttaquant.get());
+            model.addAttribute("pokemonDefenseur", pokemonDefenseur.get());
+            return "battle3";
+        } else {
+            // Gérer les cas où les Pokémon ne peuvent pas être trouvés
+            return "redirect:/erreur"; // rediriger vers une page d'erreur par exemple
+        }
     }
 
     @GetMapping("/delete/{id}")

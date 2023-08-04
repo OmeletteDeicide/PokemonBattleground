@@ -14,7 +14,9 @@
   <body>
     <div th:replace="~{fragments/header :: header}"></div>
     <main>
-      <form action="#" th:action="@{/pokemon/battle}" method="post">
+      <form th:action="@{/pokemon/battle2}" th:object="${pokemonAttaquant}" method="post">
+        <input type="hidden" name="pokemonAttaquant" th:value="${pokemonAttaquant.id}" />
+        <input type="hidden" name="pokemonDefenseur" th:value="${pokemonDefenseur.id}" />
         <div class="container-lg">
           <br />
           <div class="text">
