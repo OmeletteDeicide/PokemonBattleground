@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
+import org.antlr.v4.runtime.misc.NotNull;
 
 @Entity
 @Data
@@ -23,6 +24,7 @@ public class Pokemon implements Serializable {
     private Long id;
 
     @Column(name = "name")
+    @NotNull
     private String name;
 
     @Column(name = "type")
@@ -33,12 +35,15 @@ public class Pokemon implements Serializable {
     private Integer pc;
 
     @Column(name = "pv")
+    @NotNull
     private Integer pv;
 
     @Column(name = "attack")
+    @NotNull
     private Integer attack;
 
     @Column(name = "defense")
+    @NotNull
     private Integer defense;
 
     public Pokemon() {

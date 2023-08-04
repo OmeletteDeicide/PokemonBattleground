@@ -38,9 +38,16 @@
           </div>
           <div class="input-group mb-3">
             <span class="input-group-text" id="inputGroup-sizing-default6" for="type" type="text"  aria-required="true">Type</span>
-            <input type="text" class="form-control" aria-label="Sizing example input" id="type" name="type" th:field="*{type}" aria-describedby="inputGroup-sizing-default">
+            <select id="selectId" name="select" th:field="*{type}" class="form-select">
+              <option
+                      th:each="typeOpt:${T(projet.jonathan_simon.pokemon.entity.typeEnum).values()}"
+                      th:text="${typeOpt}"
+                      class="dropdown-item" th:value="${typeOpt}"
+              ></option>
+            </select>
           </div>
-
+          </div>
+          <br>
           <div class="d-grid gap-2 d-md-block">
             <button class="btn btn-primary" type="submit">Créer le Pokémon</button>
             <button class="btn btn-secondary" type="reset">Réinitialiser les valeurs</button>

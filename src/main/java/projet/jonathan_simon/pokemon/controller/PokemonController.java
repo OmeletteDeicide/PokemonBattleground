@@ -43,7 +43,8 @@ public class PokemonController {
 
     @GetMapping("/pokeForm")
     public String form(Model model) {
-        model.addAttribute("pokemon", new Pokemon());
+        Pokemon pokemon = new Pokemon();
+        model.addAttribute("pokemon", pokemon);
         return "pokeForm";
     }
 
