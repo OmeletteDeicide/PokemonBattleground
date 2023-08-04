@@ -20,7 +20,14 @@
         <div class="container-lg">
           <br />
           <div class="text">
-            <p>Le combat va commencer, encourager votre PokeFriends !</p>
+            <h4>Règles de combat</h4>
+            <p>- Chaque Pokémon attaque à tour de rôle</p>
+            <p>- Le pokémon attaquant (celui que vous choisissez) attaquera en premier</p>
+            <p>- Le type du Pokémon adversaire influs sur les dégats de l'attaque de votre Pokémon en fonction de son type</p>
+            <br>
+            <h4>Astuces :</h4>
+            <p>Le combat va commencer, <strong>ENCOURAGEZ</strong> votre PokeFriends !</p>
+            <br>
           </div>
           <br />
         </div>
@@ -31,7 +38,7 @@
               th:text="${pokemonAttaquant.name} + ' ' + ${pokemonAttaquant.pc} + ' PC'"
             ></label>
           </div>
-          <div class="col-1"><h1>VS</h1></div>
+          <div class="col-1"><h2>Contre</h2></div>
           <div class="col-2">
             <label
               th:text="${pokemonDefenseur.name} + ' ' + ${pokemonDefenseur.pc} + ' PC'"
@@ -40,9 +47,16 @@
         </div>
         <div class="row">
           <div class="col-5"></div>
-          <div class="col-2">
+          <div class="col-3">
             <div class="d-grid gap-2 d-md-block">
-              <button class="btn btn-warning" type="submit">COMBATTRE</button>
+              <div class="row">
+                <div class="col-4">
+                  <button class="btn btn-primary" type="submit">COMBATTRE</button>
+                </div>
+                <div class="col-8">
+                  <a href="/pokemon/battle"><button class="btn btn-secondary" type="button">CHANGER DE POKEMON</button></a>
+                </div>
+              </div>
             </div>
           </div>
         </div>

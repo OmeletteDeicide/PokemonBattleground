@@ -20,8 +20,12 @@
         <p>Ce site web à été développé dans le cadre d'un projet de mise en application d'un site web Spring Boot via l'utilisation de Thymleaf pour les templates.</p>
         <p>Ce site est basé sur un cahier des charges que vous pouvez retrouver joint avec le projet Java.</p>
         <br>
-        <h1>Télécharger le fichier PDF</h1>
-        <a href="/download-pdf" download="Jonathan_MARTIN_Simon_BARTHE_CDC.pdf">Télécharger PDF</a>
+        <h4>Télécharger le fichier PDF</h4>
+        <div class="container-md">
+          <a href="/download-pdf" download="Jonathan_MARTIN_Simon_BARTHE_CDC.pdf" ><button class="btn btn-info">Télécharger PDF</button></a>
+          <i>Version 1.0, Beta (2.0) en cours de développement...</i>
+        </div>
+
       </div>
     </main>
     <div th:replace="~{fragments/footer :: footer}"></div>
