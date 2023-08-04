@@ -149,8 +149,8 @@ public class Pokemon implements Serializable {
                 }
                 break;
         }
-        if ((int) (multiply * pokemon1.getAttack() - pokemon2.getDefense()) > 0) {
-            damage = (int) (multiply * pokemon1.getAttack() - pokemon2.getDefense());
+        if ((int) (multiply * ((((pokemon1.pc * 0.4) * pokemon1.attack) / pokemon2.defense) / 50) + 2) > 0) {
+            damage = (int) (multiply * ((((pokemon1.pc * 0.4) * pokemon1.attack) / pokemon2.defense) / 50) + 2);
         } else {
             damage = 0;
         }
