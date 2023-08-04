@@ -1,5 +1,6 @@
 package projet.jonathan_simon.pokemon.controller;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
@@ -50,6 +51,14 @@ public class PokemonController {
     // Page de création de pokémons en BDD
     @PostMapping("/pokeForm")
     public String greetingSubmit(Pokemon pokemon) {
+        int pvRan = (int) (Math.abs(Math.random() * ((200 - 20) + 20)));
+        int attackRan = (int) (Math.abs(Math.random() * ((60 - 30) + 30)));
+        int defenseRan = (int) (Math.abs(Math.random() * ((50 - 25) + 25)));
+        int pcCalc = pvRan * ((attackRan + defenseRan) / 2);
+        pokemon.setAttack(attackRan);
+        pokemon.setDefense(defenseRan);
+        pokemon.setPv(pvRan);
+        pokemon.setPc(pcCalc);
         service.savePokemon(pokemon);
         return "pokeSucces";
     }
@@ -69,7 +78,10 @@ public class PokemonController {
     public String greetingSubmitFight(@ModelAttribute("pokemonId") Pokemon pokemonA, Model model) {
         Optional<Pokemon> pokemonAttaquant = service.getPokemonById(pokemonA.getId());
         Random r = new Random();
-        Long defenserId = r.nextLong(service.countAll());
+        List<Pokemon> pokemonsList = service.getPokemons();
+        int defenserPosition = pokemonsList.size();
+        int position = r.nextInt(defenserPosition);
+        Long defenserId = pokemonsList.get(position).getId();
         Optional<Pokemon> pokemonDefenseur = service.getPokemonById(defenserId);
         Pokemon pokemonD = new Pokemon();
         if (pokemonAttaquant.isPresent()) {

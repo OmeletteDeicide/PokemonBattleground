@@ -13,7 +13,7 @@
         <div class="container-lg">
           <br \>
           <div class="text">
-            <p>Veuilliez insérer <strong>le nom du Pokémon</strong> avec <strong>sa vie</strong> (PV), <strong>son attaque</strong>, <strong>sa défense</strong>, et <strong>son/ses type(s)</strong></p>
+            <p>Veuilliez insérer <strong>le nom du Pokémon</strong> avec <strong>son type</strong></p>
           </div>
           <br \>
           <div class="input-group mb-3">
@@ -21,23 +21,7 @@
             <input type="text" class="form-control" aria-label="Sizing example input" id="name" name="name" th:field="*{name}" aria-describedby="inputGroup-sizing-default">
           </div>
           <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default2" for="pv" type="number"  aria-required="true">Point de Vie</span>
-            <input type="text" class="form-control" aria-label="Sizing example input" id="pv" name="pv" th:field="*{pv}" aria-describedby="inputGroup-sizing-default">
-          </div>
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default3" for="attack" type="number"  aria-required="true">Point d'attaque</span>
-            <input type="text" class="form-control" aria-label="Sizing example input" id="attack" name="attack" th:field="*{attack}" aria-describedby="inputGroup-sizing-default">
-          </div>
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default4" for="defense" type="number"  aria-required="true">Point de défense</span>
-            <input type="text" class="form-control" aria-label="Sizing example input" id="defense" name="defense" th:field="*{defense}" aria-describedby="inputGroup-sizing-default">
-          </div>
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default5" for="pc" type="number"  aria-required="true">Point de Combat</span>
-            <input type="text" class="form-control" aria-label="Sizing example input" id="pc" name="pc" th:field="*{pc}" aria-describedby="inputGroup-sizing-default">
-          </div>
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default6" for="type" type="text"  aria-required="true">Type</span>
+            <span class="input-group-text" id="inputGroup-sizing-default2" for="type" type="text"  aria-required="true">Type</span>
             <select id="selectId" name="select" th:field="*{type}" class="form-select">
               <option
                       th:each="typeOpt:${T(projet.jonathan_simon.pokemon.entity.typeEnum).values()}"
