@@ -1,12 +1,8 @@
 package projet.jonathan_simon.pokemon.controller;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -168,7 +164,7 @@ public class PokemonController {
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable("id") Long id) {
         try {
-             service.deletePokemon(id);
+            service.deletePokemon(id);
             return "pokeDeleteSuccess";
         } catch (Exception e) {
             return "Error";

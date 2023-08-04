@@ -149,7 +149,12 @@ public class Pokemon implements Serializable {
                 }
                 break;
         }
-        damage = (int) (multiply * pokemon1.getAttack() - pokemon2.getDefense());
+        if ((int) (multiply * pokemon1.getAttack() - pokemon2.getDefense()) > 0) {
+            damage = (int) (multiply * pokemon1.getAttack() - pokemon2.getDefense());
+        } else {
+            damage = 0;
+        }
+
         return damage;
     }
 
@@ -161,25 +166,30 @@ public class Pokemon implements Serializable {
         int pv = 0;
         Pokemon pokemonAttaquant = pokemon1;
         Pokemon pokemonDefenseur = pokemon2;
+        if (pokemonAttaquant.Hit(pokemonAttaquant, pokemonDefenseur) == 0
+                && pokemonDefenseur.Hit(pokemonDefenseur, pokemonAttaquant) == 0) {
+            action += "MATCH NUL !";
+            return action;
+        }
         while (pokemonAttaquant.pv > 0 || pokemonDefenseur.pv > 0) {
             if (pokemonAttaquant.pv > 0) {
                 degats = pokemonAttaquant.Hit(pokemonAttaquant, pokemonDefenseur);
                 pokemonDefenseur.pv = ((int) (pokemonDefenseur.pv - degats));
                 action += "Le pokemon " + pokemonAttaquant.getName() + " à fait " + degats + " au pokemon "
-                        + pokemonDefenseur.getName() + "\n";
+                        + pokemonDefenseur.getName() + "\r";
             } else {
-                action += "Le pokemon " + pokemonAttaquant.getName() + " à mis K.O " + pokemonDefenseur.getName()
-                        + "\n";
+                action += "Le pokemon " + pokemonDefenseur.getName() + " à mis K.O " + pokemonAttaquant.getName()
+                        + "\r";
                 return action;
             }
             if (pokemonDefenseur.pv > 0) {
                 degats = pokemonDefenseur.Hit(pokemonDefenseur, pokemonAttaquant);
                 pokemonAttaquant.pv = ((int) (pokemonAttaquant.pv - degats));
                 action += "Le pokemon " + pokemonDefenseur.getName() + " à fait " + degats + " au pokemon "
-                        + pokemonAttaquant.getName() + "\n";
+                        + pokemonAttaquant.getName() + "\r";
             } else {
-                action += "Le pokemon " + pokemonDefenseur.getName() + " à mis K.O " + pokemonAttaquant.getName()
-                        + "\n";
+                action += "Le pokemon " + pokemonAttaquant.getName() + " à mis K.O " + pokemonDefenseur.getName()
+                        + "\r";
                 return action;
             }
         }
