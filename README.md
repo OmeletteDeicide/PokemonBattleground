@@ -1,6 +1,6 @@
 # Pokemon Battle ground
 [Projet] - Application Web Spring
-- Créé par Jonathan MARTIN et Simone BARTHE
+- Créé par Jonathan MARTIN et Simon BARTHE
 - Application permettant l'ajout et la création de Pokémons
 - Gestion de combats aléatoire entre Pokémons
 - Serveur disponible sur TOMCAT connecté avec MariaDB ou MySQL (voir la configuration de connexion)
@@ -19,3 +19,11 @@ Les Points de Vie, d'attaque et de défense sont générés aléatoirement, les 
 ## Délais
 5 jours de développements avec l'inclusion d'un cahier des charges à rythme de 6 heures / jours.
 ## Version 1.0, Beta (2.0 en cours de développement ...)
+
+
+# Modifications lié au principe  :
+- Ajout de nouveau fichiers de classes pour décomposer notre ancien controller qui s'occupait de tout faire
+- Ajout d'un dossier pour stocker des utils à savoir des fonctions logiques qui figuraient auss idans le controller
+- Changement du nom du controlleur initiale pour le transformer en 1 classe avec 1 seule réponsabilité (avant il s'occupait de gérer l'affichage, le calcul, ...)
+- Changement de fonctions standard en Interface et fonction abstraite respectant le principe SOLID d'inversion des dépendances
+- Création de nouveaux fichiers pour respect du premier principe SOLID de résponsabilité unique 
